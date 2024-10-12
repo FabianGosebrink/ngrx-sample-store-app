@@ -1,11 +1,13 @@
 @use "colors";
 
 .header-container {
+  box-sizing: border-box;
   display: flex;
   width: 100%;
   height: 100%;
   align-items: center;
-  padding: 0 20px;
+  justify-content: space-between;
+  padding: 0 40px;
 
   .title {
     display: flex;
@@ -17,5 +19,13 @@
     h3 {
       margin: 0;
     }
+  }
+
+  .cart {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: colors.$secondary-color;
+    cursor: pointer;
   }
 }
