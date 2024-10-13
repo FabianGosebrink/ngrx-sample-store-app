@@ -1,0 +1,25 @@
+@use "colors";
+
+.detail-info-container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 10px 0;
+  justify-content: space-between;
+
+  .detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    h3 {
+      margin: 0;
+      color: colors.$secondary-color;
+    }
+
+    .price {
+      color: colors.$primary-color;
+    }
+  }
+}

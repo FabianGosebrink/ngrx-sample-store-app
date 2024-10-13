@@ -13,7 +13,7 @@ export class ProductComponent {
   product = input.required<Product>();
 
   clicked = output<string>();
-  cartClicked = output<string>();
+  cartClicked = output<Product>();
 
   onClick(): void {
     this.clicked.emit(this.product().id);
@@ -22,6 +22,6 @@ export class ProductComponent {
   onCartClick(event: Event): void {
     event.stopPropagation();
 
-    this.cartClicked.emit(this.product().id);
+    this.cartClicked.emit(this.product());
   }
 }

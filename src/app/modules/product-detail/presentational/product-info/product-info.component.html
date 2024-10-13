@@ -1,0 +1,10 @@
+<div class="detail-info-container">
+  <div class="detail-info">
+    <h3>{{ product().name }}</h3>
+    <div>
+      <i>{{ product().category | categoryName }}</i>
+    </div>
+    <div class="price">{{ product().price | currency: "EUR" }}</div>
+  </div>
+  <app-add-to-cart-button (clicked)="onAddToCartClicked()" />
+</div>

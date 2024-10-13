@@ -1,0 +1,17 @@
+@use "colors";
+
+.add-to-cart-button {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:hover {
+    color: colors.$primary-color;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}

@@ -50,7 +50,7 @@ export class ProductsComponent {
     this.router.navigate(['products', id]);
   }
 
-  onCartClicked(id: string): void {
-    console.log('Add to Cart', id);
+  onCartClicked(product: Product): void {
+    console.log('Add to Cart', product);
   }
 }

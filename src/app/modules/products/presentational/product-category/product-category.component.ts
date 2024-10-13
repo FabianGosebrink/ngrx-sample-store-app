@@ -16,13 +16,13 @@ export class ProductCategoryComponent {
 
   clicked = output<string>();
 
-  cartClicked = output<string>();
+  cartClicked = output<Product>();
 
   onClicked(id: string): void {
     this.clicked.emit(id);
   }
 
-  onCartClicked(id: string): void {
-    this.cartClicked.emit(id);
+  onCartClicked(product: Product): void {
+    this.cartClicked.emit(product);
   }
 }
