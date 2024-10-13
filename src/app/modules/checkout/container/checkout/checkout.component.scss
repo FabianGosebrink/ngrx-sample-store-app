@@ -1,0 +1,12 @@
+@use "colors";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+h3 {
+  margin: 0;
+  color: colors.$primary-color;
+}

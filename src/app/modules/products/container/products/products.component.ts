@@ -1,12 +1,13 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { Product } from '../../../shared/models/product.models';
 import { CategoryNamePipe } from '../../../shared/pipes/category-name.pipe';
+import { CheckoutService } from '../../../shared/services/checkout.service';
 import { ProductCategoryComponent } from '../../presentational/product-category/product-category.component';
 import { ProductComponent } from '../../presentational/product/product.component';
 import { ProductsService } from '../../service/products.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -22,6 +23,7 @@ import { Router } from '@angular/router';
 })
 export class ProductsComponent {
   private readonly productsService = inject(ProductsService);
+  private readonly checkoutService = inject(CheckoutService);
   private readonly router = inject(Router);
 
   productCategories$ = this.productsService.loadProducts().pipe(
@@ -51,6 +53,6 @@ export class ProductsComponent {
   }
 
   onCartClicked(product: Product): void {
-    console.log('Add to Cart', product);
+    this.checkoutService.addToCart(product);
   }
 }

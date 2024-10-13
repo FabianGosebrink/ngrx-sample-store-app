@@ -1,0 +1,18 @@
+@use "colors";
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+
+  .total-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+
+    .total {
+      color: colors.$primary-color;
+    }
+  }
+}

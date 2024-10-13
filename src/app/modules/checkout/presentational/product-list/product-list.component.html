@@ -1,0 +1,13 @@
+<div class="list">
+  @for (product of products(); track product.id) {
+    <app-product-list-entry
+      [product]="product"
+      (removeClicked)="onRemoveClicked($index)"
+    />
+  }
+  <div class="total-container">
+    <div class="total">
+      <strong>Total: {{ totalAmount() | currency: "EUR" }}</strong>
+    </div>
+  </div>
+</div>
