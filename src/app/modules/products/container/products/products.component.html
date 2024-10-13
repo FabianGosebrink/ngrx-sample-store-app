@@ -1,6 +1,8 @@
 <div class="products-list">
   @for (productCategory of productCategories$ | async; track productCategory.category) {
     <app-product-category [categoryName]="productCategory.category | categoryName"
-                          [products]="productCategory.products" (clicked)="onProductClicked($event)" (cartClicked)="onCartClicked($event)" />
+                          [products]="productCategory.products"
+                          (clicked)="onProductClicked($event)"
+                          (cartClicked)="onCartClicked($event)" />
   }
 </div>
