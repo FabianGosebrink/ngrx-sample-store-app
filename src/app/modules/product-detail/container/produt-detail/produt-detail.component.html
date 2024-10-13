@@ -3,6 +3,9 @@
   <div class="detail-container">
     <app-product-image [imageUrl]="product.imageUrl" />
 
-    <app-product-info [product]="product" (addToCartClicked)="onAddToCartClicked($event)" />
+    <app-product-info
+      [product]="product"
+      (addToCartClicked)="onAddToCartClicked($event)"
+    />
   </div>
 }

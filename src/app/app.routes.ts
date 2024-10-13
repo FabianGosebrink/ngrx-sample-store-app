@@ -21,6 +21,13 @@ export const routes: Routes = [
           ).then((c) => c.ProdutDetailComponent),
       },
       {
+        path: 'checkout',
+        loadComponent: () =>
+          import(
+            './modules/checkout/container/checkout/checkout.component'
+          ).then((c) => c.CheckoutComponent),
+      },
+      {
         path: '**',
         pathMatch: 'full',
         redirectTo: 'products',

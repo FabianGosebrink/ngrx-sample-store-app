@@ -7,13 +7,9 @@ import { AddToCartButtonComponent } from '../add-to-cart-button/add-to-cart-butt
 @Component({
   selector: 'app-product-info',
   standalone: true,
-  imports: [
-    CategoryNamePipe,
-    CurrencyPipe,
-    AddToCartButtonComponent
-  ],
+  imports: [CategoryNamePipe, CurrencyPipe, AddToCartButtonComponent],
   templateUrl: './product-info.component.html',
-  styleUrl: './product-info.component.scss'
+  styleUrl: './product-info.component.scss',
 })
 export class ProductInfoComponent {
   product = input.required<Product>();

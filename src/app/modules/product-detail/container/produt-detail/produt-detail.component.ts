@@ -12,7 +12,14 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-produt-detail',
   standalone: true,
-  imports: [CurrencyPipe, NgOptimizedImage, CategoryNamePipe, RouterLink, ProductImageComponent, ProductInfoComponent],
+  imports: [
+    CurrencyPipe,
+    NgOptimizedImage,
+    CategoryNamePipe,
+    RouterLink,
+    ProductImageComponent,
+    ProductInfoComponent,
+  ],
   templateUrl: './produt-detail.component.html',
   styleUrl: './produt-detail.component.scss',
 })
