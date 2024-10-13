@@ -1,0 +1,19 @@
+@use "colors";
+
+.product-category {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  h4 {
+    margin: 0;
+    color: colors.$secondary-color;
+  }
+
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+  }
+}

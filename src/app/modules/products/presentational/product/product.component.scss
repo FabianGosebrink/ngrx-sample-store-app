@@ -1,0 +1,60 @@
+@use "colors";
+
+.product-container {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 200px;
+  box-sizing: border-box;
+  background-color: colors.$primary-background-color;
+  border: 2px solid colors.$secondary-background-color;
+  cursor: pointer;
+
+  &:hover {
+    border-color: colors.$primary-color;
+  }
+
+  .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    min-width: 0;
+    min-height: 0;
+
+    .image {
+      height: 100%;
+      width: auto;
+    }
+  }
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 70px;
+    box-sizing: border-box;
+    padding: 5px 20px;
+    gap: 10px;
+    color: colors.$secondary-color;
+    background-color: colors.$secondary-background-color;
+    font-size: 12px;
+
+    .price-actions {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+
+      .cart-icon {
+        display: block;
+        width: 20px;
+        height: 20px;
+
+        &:hover {
+          color: colors.$primary-color;
+        }
+      }
+    }
+  }
+}

@@ -1,14 +1,15 @@
-<div class="header-container">
-  <div class="title" routerLink="products">
-    <img class="image" ngSrc="logos/ngrx_logo.svg" width="30" height="30" alt="NgRx Logo" />
-    <h3 class="logo">NgRx Sample Store App</h3>
+<a class="product-container" (click)="onClick()">
+  <div class="image-container">
+    <img class="image" [src]="product().imageUrl" alt="Product" />
   </div>
-
-  <a class="cart">
-    <div class="cart-icon">
-      <svg fill="currentColor" id="Cart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-           width="100%" height="100%" viewBox="0 0 902.86 902.86"
-           xml:space="preserve">
+  <div class="product-info">
+    <strong>{{ product().name }}</strong>
+    <div class="price-actions">
+      <div>{{ product().price | currency: 'EUR' }}</div>
+      <a class="cart-icon" (click)="onCartClick($event)">
+        <svg fill="currentColor" id="Cart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             width="100%" height="100%" viewBox="0 0 902.86 902.86"
+             xml:space="preserve">
         <g>
           <g>
             <path d="M671.504,577.829l110.485-432.609H902.86v-68H729.174L703.128,179.2L0,178.697l74.753,399.129h596.751V577.829z
@@ -23,8 +24,7 @@
           </g>
         </g>
       </svg>
+      </a>
     </div>
-<!--    <img class="cart-icon" ngSrc="icons/cart.svg" width="20" height="20" alt="Cart" />-->
-    <div>Cart (0)</div>
-  </a>
-</div>
+  </div>
+</a>

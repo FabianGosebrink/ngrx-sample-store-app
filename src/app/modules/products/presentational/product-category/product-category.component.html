@@ -1,0 +1,8 @@
+<div class="product-category">
+  <h4>{{ categoryName() }}</h4>
+  <div class="products">
+    @for (product of products(); track product.id) {
+      <app-product [product]="product" (clicked)="onClicked($event)" (cartClicked)="onCartClicked($event)" />
+    }
+  </div>
+</div>
