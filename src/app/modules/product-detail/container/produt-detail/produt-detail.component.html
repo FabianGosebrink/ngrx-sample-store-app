@@ -1,13 +1,20 @@
-<a class="product-container" (click)="onClick()">
-  <div class="image-container">
-    <img class="image" [src]="product().imageUrl" alt="Product" />
-  </div>
-  <div class="product-info">
-    <strong>{{ product().name }}</strong>
-    <div class="price-actions">
-      <div>{{ product().price | currency: "EUR" }}</div>
-      <a class="cart-icon" (click)="onCartClick($event)">
-        <svg
+<a class="back-link" routerLink="products">Back</a>
+@if (product(); as product) {
+  <div class="detail-container">
+    <div class="image-container">
+      <img [ngSrc]="product.imageUrl" height="300" width="200" alt="Product" />
+    </div>
+
+    <div class="detail-info-container">
+      <div class="detail-info">
+        <h3>{{ product.name }}</h3>
+        <div>
+          <i>{{ product.category | categoryName }}</i>
+        </div>
+        <div class="price">{{ product.price | currency: "EUR" }}</div>
+      </div>
+      <a class="buy-button"
+        ><svg
           fill="currentColor"
           id="Cart"
           xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +41,8 @@
             </g>
           </g>
         </svg>
-      </a>
+        Add to Cart</a
+      >
     </div>
   </div>
-</a>
+}

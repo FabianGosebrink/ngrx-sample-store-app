@@ -8,13 +8,23 @@ export const routes: Routes = [
     children: [
       {
         path: 'products',
-        loadComponent: () => import('./modules/products/container/products/products.component').then((c) => c.ProductsComponent)
+        loadComponent: () =>
+          import(
+            './modules/products/container/products/products.component'
+          ).then((c) => c.ProductsComponent),
+      },
+      {
+        path: 'products/:id',
+        loadComponent: () =>
+          import(
+            './modules/product-detail/container/produt-detail/produt-detail.component'
+          ).then((c) => c.ProdutDetailComponent),
       },
       {
         path: '**',
         pathMatch: 'full',
-        redirectTo: 'products'
-      }
-    ]
-  }
+        redirectTo: 'products',
+      },
+    ],
+  },
 ];

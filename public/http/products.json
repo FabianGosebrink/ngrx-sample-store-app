@@ -1,0 +1,128 @@
+[
+  {
+    "id": "1",
+    "name": "Throne of Glass",
+    "category": "book_fantasy",
+    "price": 34.9,
+    "imageUrl": "https://images.isbndb.com/covers/09/57/9781639730957.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Crown of Midnight",
+    "category": "book_fantasy",
+    "price": 29.9,
+    "imageUrl": "https://images.isbndb.com/covers/09/71/9781639730971.jpg"
+  },
+  {
+    "id": "3",
+    "name": "Heir of Fire",
+    "category": "book_fantasy",
+    "price": 29.9,
+    "imageUrl": "https://images.isbndb.com/covers/09/95/9781639730995.jpg"
+  },
+  {
+    "id": "4",
+    "name": "Queen of Shadows",
+    "category": "book_fantasy",
+    "price": 29.9,
+    "imageUrl": "https://images.isbndb.com/covers/10/15/9781639731015.jpg"
+  },
+  {
+    "id": "5",
+    "name": "Empire of Storms",
+    "category": "book_fantasy",
+    "price": 29.9,
+    "imageUrl": "https://images.isbndb.com/covers/10/39/9781639731039.jpg"
+  },
+  {
+    "id": "6",
+    "name": "Tower of Dawn",
+    "category": "book_fantasy",
+    "price": 29.9,
+    "imageUrl": "https://images.isbndb.com/covers/10/53/9781639731053.jpg"
+  },
+  {
+    "id": "7",
+    "name": "Kingdom of Ash",
+    "category": "book_fantasy",
+    "price": 29.9,
+    "imageUrl": "https://images.isbndb.com/covers/10/77/9781639731077.jpg"
+  },
+  {
+    "id": "8",
+    "name": "The Assassin\"s Blade",
+    "category": "book_fantasy",
+    "price": 34.9,
+    "imageUrl": "https://images.isbndb.com/covers/10/84/9781639731084.jpg"
+  },
+  {
+    "id": "9",
+    "name": "The Great Empires of the Ancient World",
+    "category": "book_history",
+    "price": 24.9,
+    "imageUrl": "https://images.isbndb.com/covers/58/85/9780500295885.jpg"
+  },
+  {
+    "id": "10",
+    "name": "The Anarchy",
+    "category": "book_history",
+    "price": 19.9,
+    "imageUrl": "https://images.isbndb.com/covers/39/54/9781635573954.jpg"
+  },
+  {
+    "id": "11",
+    "name": "The Great Sea",
+    "category": "book_history",
+    "price": 49.9,
+    "imageUrl": "https://images.isbndb.com/covers/59/94/9780199315994.jpg"
+  },
+  {
+    "id": "12",
+    "name": "The Devil in the White City",
+    "category": "book_history",
+    "price": 34.9,
+    "imageUrl": "https://images.isbndb.com/covers/84/49/9780609608449.jpg"
+  },
+  {
+    "id": "13",
+    "name": "Happy Place",
+    "category": "book_romance",
+    "price": 19.9,
+    "imageUrl": "https://images.isbndb.com/covers/12/75/9780593441275.jpg"
+  },
+  {
+    "id": "14",
+    "name": "Red, White & Royal Blue",
+    "category": "book_romance",
+    "price": 14.9,
+    "imageUrl": "https://images.isbndb.com/covers/67/76/9781250316776.jpg"
+  },
+  {
+    "id": "15",
+    "name": "Counting Miracles",
+    "category": "book_romance",
+    "price": 29.9,
+    "imageUrl": "https://images.isbndb.com/covers/95/92/9780593449592.jpg"
+  },
+  {
+    "id": "16",
+    "name": "Rev Me Up",
+    "category": "book_romance",
+    "price": 9.9,
+    "imageUrl": "https://images.isbndb.com/covers/81/02/9781942238102.jpg"
+  },
+  {
+    "id": "17",
+    "name": "Just for the Summer",
+    "category": "book_romance",
+    "price": 14.9,
+    "imageUrl": "https://images.isbndb.com/covers/44/31/9781538704431.jpg"
+  },
+  {
+    "id": "18",
+    "name": "Daydream",
+    "category": "book_romance",
+    "price": 19.9,
+    "imageUrl": "https://images.isbndb.com/covers/57/40/9781398525740.jpg"
+  }
+]

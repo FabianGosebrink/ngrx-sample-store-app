@@ -5,13 +5,8 @@ import { HeaderComponent } from '../../presentational/header/header.component';
 @Component({
   selector: 'app-shell',
   standalone: true,
-  imports: [
-    HeaderComponent,
-    RouterOutlet
-  ],
+  imports: [HeaderComponent, RouterOutlet],
   templateUrl: './shell.component.html',
-  styleUrl: './shell.component.scss'
+  styleUrl: './shell.component.scss',
 })
-export class ShellComponent {
-
-}
+export class ShellComponent {}

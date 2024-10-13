@@ -5,18 +5,15 @@ import { Product } from '../../../shared/models/product.models';
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [
-    CurrencyPipe,
-    NgOptimizedImage
-  ],
+  imports: [CurrencyPipe, NgOptimizedImage],
   templateUrl: './product.component.html',
-  styleUrl: './product.component.scss'
+  styleUrl: './product.component.scss',
 })
 export class ProductComponent {
   product = input.required<Product>();
 
   clicked = output<string>();
-  cartClicked = output<string>()
+  cartClicked = output<string>();
 
   onClick(): void {
     this.clicked.emit(this.product().id);
