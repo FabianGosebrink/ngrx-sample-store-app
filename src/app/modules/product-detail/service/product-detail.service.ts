@@ -1,7 +1,19 @@
-import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { map, Observable, pipe } from 'rxjs';
 import { Product } from '../../shared/models/product.models';
+
+function checkValueDefined<T>() {
+  return pipe(
+    map((value: T | undefined) => {
+      if (value === undefined) {
+        throw new Error('Value is undefined');
+      }
+
+      return value as T;
+    }),
+  );
+}
 
 @Injectable({
   providedIn: 'root',
@@ -9,9 +21,10 @@ import { Product } from '../../shared/models/product.models';
 export class ProductDetailService {
   private readonly http = inject(HttpClient);
 
-  loadProductDetail(id: string): Observable<Product | undefined> {
-    return this.http
-      .get<Product[]>('http/products.json')
-      .pipe(map((products) => products.find((p) => p.id === id)));
+  loadProductDetail(id: string): Observable<Product> {
+    return this.http.get<Product[]>('http/products.json').pipe(
+      map((products) => products.find((p) => p.id === id)),
+      checkValueDefined(),
+    );
   }
 }

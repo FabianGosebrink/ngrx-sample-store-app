@@ -1,13 +1,13 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { map } from 'rxjs';
+import { Component, inject, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Product } from '../../../shared/models/product.models';
 import { CategoryNamePipe } from '../../../shared/pipes/category-name.pipe';
 import { CheckoutService } from '../../../shared/services/checkout.service';
 import { ProductCategoryComponent } from '../../presentational/product-category/product-category.component';
 import { ProductComponent } from '../../presentational/product/product.component';
-import { ProductsService } from '../../service/products.service';
+import { ProductsActions } from '../../state/products.actions';
+import { selectProductsByCategories } from '../../state/products.selectors';
 
 @Component({
   selector: 'app-products',
@@ -21,35 +21,20 @@ import { ProductsService } from '../../service/products.service';
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
-export class ProductsComponent {
-  private readonly productsService = inject(ProductsService);
+export class ProductsComponent implements OnInit {
+  private readonly store = inject(Store);
   private readonly checkoutService = inject(CheckoutService);
-  private readonly router = inject(Router);
 
-  productCategories$ = this.productsService.loadProducts().pipe(
-    map((products) =>
-      products.reduce((result: Record<string, Product[]>, product) => {
-        const category = product.category;
-
-        if (!result[category]) {
-          result[category] = [];
-        }
-
-        result[category].push(product);
-
-        return result;
-      }, {}),
-    ),
-    map((products) =>
-      Object.keys(products).map((category) => ({
-        category,
-        products: products[category],
-      })),
-    ),
+  readonly productsByCategories = this.store.selectSignal(
+    selectProductsByCategories,
   );
 
+  ngOnInit(): void {
+    this.store.dispatch(ProductsActions.loadProducts());
+  }
+
   onProductClicked(id: string): void {
-    this.router.navigate(['products', id]);
+    this.store.dispatch(ProductsActions.navigateToDetail({ id }));
   }
 
   onCartClicked(product: Product): void {
