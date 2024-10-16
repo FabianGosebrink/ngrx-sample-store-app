@@ -22,6 +22,7 @@
     "@ngrx/operators": "^18.1.0",
     "@ngrx/store": "^18.1.0",
     "@ngrx/store-devtools": "^18.1.0",
+    "ng-mocks": "^14.13.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
@@ -31,6 +32,7 @@
     "@angular/cli": "^18.2.7",
     "@angular/compiler-cli": "^18.2.0",
     "@types/jasmine": "~5.1.0",
+    "@types/jest": "^29.5.13",
     "jest": "^29.7.0",
     "jest-preset-angular": "^14.2.4",
     "prettier": "3.3.3",
@@ -38,6 +40,8 @@
   },
   "jest": {
     "preset": "jest-preset-angular",
-    "setupFilesAfterEnv": ["<rootDir>/setup-jest.ts"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/setup-jest.ts"
+    ]
   }
 }
