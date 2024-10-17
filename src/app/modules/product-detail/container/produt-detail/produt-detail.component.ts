@@ -1,14 +1,12 @@
 import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
 import { Component, inject, input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Product } from '../../../shared/models/product.models';
 import { CategoryNamePipe } from '../../../shared/pipes/category-name.pipe';
 import { ProductImageComponent } from '../../presentational/product-image/product-image.component';
 import { ProductInfoComponent } from '../../presentational/product-info/product-info.component';
-import { ProductDetailActions } from '../../state/product-detail.actions';
-import { selectProductDetail } from '../../state/product-detail.selectors';
-import { CheckoutActions } from '../../../shared/state/checkout.actions';
+import { ProductDetailStore } from '../../state/product-detail.store';
+import { CheckoutStore } from '../../../shared/state/checkout.store';
 
 @Component({
   selector: 'app-produt-detail',
@@ -23,19 +21,21 @@ import { CheckoutActions } from '../../../shared/state/checkout.actions';
   ],
   templateUrl: './produt-detail.component.html',
   styleUrl: './produt-detail.component.scss',
+  providers: [ProductDetailStore],
 })
 export class ProdutDetailComponent implements OnInit {
-  private readonly store = inject(Store);
+  private readonly store = inject(ProductDetailStore);
+  private readonly checkoutStore = inject(CheckoutStore);
 
   id = input.required<string>();
 
-  product = this.store.selectSignal(selectProductDetail);
+  readonly product = this.store.product;
 
   ngOnInit(): void {
-    this.store.dispatch(ProductDetailActions.loadProduct({ id: this.id() }));
+    this.store.loadProduct(this.id);
   }
 
   onAddToCartClicked(product: Product): void {
-    this.store.dispatch(CheckoutActions.addProduct({ product }));
+    this.checkoutStore.addProduct(product);
   }
 }

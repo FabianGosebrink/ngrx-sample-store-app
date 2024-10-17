@@ -1,11 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ProductListComponent } from '../../presentational/product-list/product-list.component';
-import { Store } from '@ngrx/store';
-import {
-  selectCartProducts,
-  selectTotalAmount,
-} from '../../state/checkout.selectors';
-import { CheckoutActions } from '../../../shared/state/checkout.actions';
+import { CheckoutStore } from '../../../shared/state/checkout.store';
 
 @Component({
   selector: 'app-checkout',
@@ -15,13 +10,13 @@ import { CheckoutActions } from '../../../shared/state/checkout.actions';
   styleUrl: './checkout.component.scss',
 })
 export class CheckoutComponent {
-  private readonly store = inject(Store);
+  private readonly store = inject(CheckoutStore);
 
-  readonly cartProducts = this.store.selectSignal(selectCartProducts);
+  readonly cartProducts = this.store.cartProducts;
 
-  readonly totalAmount = this.store.selectSignal(selectTotalAmount);
+  readonly totalAmount = this.store.totalAmount;
 
   onRemoveClicked(index: number): void {
-    this.store.dispatch(CheckoutActions.removeProduct({ index }));
+    this.store.removeProduct(index);
   }
 }

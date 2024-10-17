@@ -1,13 +1,11 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, inject } from '@angular/core';
 import { Product } from '../../../shared/models/product.models';
 import { CategoryNamePipe } from '../../../shared/pipes/category-name.pipe';
 import { ProductCategoryComponent } from '../../presentational/product-category/product-category.component';
 import { ProductComponent } from '../../presentational/product/product.component';
-import { ProductsActions } from '../../state/products.actions';
-import { selectProductsByCategories } from '../../state/products.selectors';
-import { CheckoutActions } from '../../../shared/state/checkout.actions';
+import { ProductsStore } from '../../state/products.store';
+import { CheckoutStore } from '../../../shared/state/checkout.store';
 
 @Component({
   selector: 'app-products',
@@ -20,23 +18,19 @@ import { CheckoutActions } from '../../../shared/state/checkout.actions';
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
+  providers: [ProductsStore],
 })
-export class ProductsComponent implements OnInit {
-  private readonly store = inject(Store);
+export class ProductsComponent {
+  private readonly store = inject(ProductsStore);
+  private readonly checkoutStore = inject(CheckoutStore);
 
-  readonly productsByCategories = this.store.selectSignal(
-    selectProductsByCategories,
-  );
-
-  ngOnInit(): void {
-    this.store.dispatch(ProductsActions.loadProducts());
-  }
+  readonly productsByCategories = this.store.productsByCategories;
 
   onProductClicked(id: string): void {
-    this.store.dispatch(ProductsActions.navigateToDetail({ id }));
+    this.store.navigateToDetail(id);
   }
 
   onCartClicked(product: Product): void {
-    this.store.dispatch(CheckoutActions.addProduct({ product }));
+    this.checkoutStore.addProduct(product);
   }
 }
