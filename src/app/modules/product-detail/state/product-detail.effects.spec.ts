@@ -59,6 +59,7 @@ describe('ProductDetailEffects', () => {
         expect(result).toEqual(
           ProductDetailActions.loadProductSuccess({ product }),
         );
+        expect(loadProductDetailSpy).toHaveBeenCalledWith(id);
       });
     }));
   });
