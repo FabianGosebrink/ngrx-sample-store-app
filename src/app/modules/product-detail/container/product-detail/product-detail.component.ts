@@ -11,7 +11,7 @@ import { ProductInfoComponent } from '../../presentational/product-info/product-
 import { ProductDetailService } from '../../service/product-detail.service';
 
 @Component({
-  selector: 'app-produt-detail',
+  selector: 'app-product-detail',
   standalone: true,
   imports: [
     CurrencyPipe,
@@ -21,10 +21,10 @@ import { ProductDetailService } from '../../service/product-detail.service';
     ProductImageComponent,
     ProductInfoComponent,
   ],
-  templateUrl: './produt-detail.component.html',
-  styleUrl: './produt-detail.component.scss',
+  templateUrl: './product-detail.component.html',
+  styleUrl: './product-detail.component.scss',
 })
-export class ProdutDetailComponent {
+export class ProductDetailComponent {
   private readonly productDetailService = inject(ProductDetailService);
   private readonly checkoutService = inject(CheckoutService);
 
