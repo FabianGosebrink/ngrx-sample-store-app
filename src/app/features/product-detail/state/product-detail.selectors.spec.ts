@@ -2,7 +2,7 @@ import {
   initialProductDetailState,
   productDetailFeatureKey,
 } from './product-detail.state';
-import { Product, ProductCategory } from '../../shared/models/product.models';
+import { Product, ProductCategory } from '../../../shared/models/product.models';
 import { selectProductDetail } from './product-detail.selectors';
 
 describe('ProductDetailSelectors', () => {

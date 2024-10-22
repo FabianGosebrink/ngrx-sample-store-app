@@ -1,4 +1,4 @@
-import { Product, ProductCategory } from '../../shared/models/product.models';
+import { Product, ProductCategory } from '../../../shared/models/product.models';
 import { productDetailReducer } from './product-detail.reducer';
 import { ProductDetailActions } from './product-detail.actions';
 import {

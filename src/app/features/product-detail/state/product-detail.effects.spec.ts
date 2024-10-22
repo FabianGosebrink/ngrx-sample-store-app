@@ -5,7 +5,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { MockProvider } from 'ng-mocks';
-import { Product, ProductCategory } from '../../shared/models/product.models';
+import { Product, ProductCategory } from '../../../shared/models/product.models';
 import * as productDetailEffects from '../state/product-detail.effects';
 import { ProductDetailActions } from './product-detail.actions';
 
