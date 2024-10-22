@@ -31,7 +31,7 @@
             ],
             "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/app/modules/shared/theme"]
+              "includePaths": ["src/app/shared/theme"]
             },
             "scripts": []
           },
@@ -92,5 +92,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "a70ef9be-4150-4fda-b3b1-b7d790fc4d1a"
   }
 }

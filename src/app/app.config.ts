@@ -10,8 +10,8 @@ import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 import { routes } from './app.routes';
-import { checkoutFeatureKey } from './modules/checkout/state/checkout.state';
-import { checkoutReducer } from './modules/checkout/state/checkout.reducer';
+import { checkoutFeatureKey } from './features/checkout/state/checkout.state';
+import { checkoutReducer } from './features/checkout/state/checkout.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
