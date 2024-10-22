@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { ShellComponent } from './modules/shell/container/shell/shell.component';
+import { ShellComponent } from './features/shell/container/shell/shell.component';
 
 export const routes: Routes = [
   {
@@ -10,21 +10,21 @@ export const routes: Routes = [
         path: 'products',
         loadComponent: () =>
           import(
-            './modules/products/container/products/products.component'
+            './features/products/container/products/products.component'
           ).then((c) => c.ProductsComponent),
       },
       {
         path: 'products/:id',
         loadComponent: () =>
           import(
-            './modules/product-detail/container/product-detail/product-detail.component'
+            './features/product-detail/container/product-detail/product-detail.component'
           ).then((c) => c.ProductDetailComponent),
       },
       {
         path: 'checkout',
         loadComponent: () =>
           import(
-            './modules/checkout/container/checkout/checkout.component'
+            './features/checkout/container/checkout/checkout.component'
           ).then((c) => c.CheckoutComponent),
       },
       {

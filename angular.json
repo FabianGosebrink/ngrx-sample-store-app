@@ -31,7 +31,7 @@
             ],
             "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/app/modules/shared/theme"]
+              "includePaths": ["src/app/shared/theme"]
             },
             "scripts": []
           },
