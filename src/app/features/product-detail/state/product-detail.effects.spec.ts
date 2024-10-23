@@ -5,7 +5,10 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { MockProvider } from 'ng-mocks';
-import { Product, ProductCategory } from '../../../shared/models/product.models';
+import {
+  Product,
+  ProductCategory,
+} from '../../../shared/models/product.models';
 import * as productDetailEffects from '../state/product-detail.effects';
 import { ProductDetailActions } from './product-detail.actions';
 
@@ -60,6 +63,34 @@ describe('ProductDetailEffects', () => {
           ProductDetailActions.loadProductSuccess({ product }),
         );
         expect(loadProductDetailSpy).toHaveBeenCalledWith(id);
+      });
+    }));
+
+    it('should not load products when id is undefined', waitForAsync(() => {
+      // arrange
+      const id = undefined;
+      const product: Product = {
+        id: '',
+        name: 'Product 123',
+        price: 99,
+        category: ProductCategory.BOOK_FANTASY,
+        imageUrl: 'foo/bar',
+      };
+
+      const loadProductDetailSpy = jest
+        .spyOn(productDetailService, 'loadProductDetail')
+        .mockReturnValue(of(product));
+
+      actions$ = of(ProductDetailActions.loadProduct({ id }));
+
+      // act
+      const result$ = TestBed.runInInjectionContext(() =>
+        productDetailEffects.loadProduct$(),
+      );
+
+      // assert
+      result$.subscribe(() => {
+        expect(loadProductDetailSpy).not.toHaveBeenCalled();
       });
     }));
   });
