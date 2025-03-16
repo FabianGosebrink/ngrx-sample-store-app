@@ -3,11 +3,10 @@ import { Component, input, output } from '@angular/core';
 import { Product } from '../../../../shared/models/product.models';
 
 @Component({
-  selector: 'app-product',
-  standalone: true,
-  imports: [CurrencyPipe, NgOptimizedImage],
-  templateUrl: './product.component.html',
-  styleUrl: './product.component.scss',
+    selector: 'app-product',
+    imports: [CurrencyPipe, NgOptimizedImage],
+    templateUrl: './product.component.html',
+    styleUrl: './product.component.scss'
 })
 export class ProductComponent {
   product = input.required<Product>();

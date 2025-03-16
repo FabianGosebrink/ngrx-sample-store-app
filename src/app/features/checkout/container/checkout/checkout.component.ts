@@ -8,11 +8,10 @@ import {
 import { CheckoutActions } from '../../../../shared/state/checkout.actions';
 
 @Component({
-  selector: 'app-checkout',
-  standalone: true,
-  imports: [ProductListComponent],
-  templateUrl: './checkout.component.html',
-  styleUrl: './checkout.component.scss',
+    selector: 'app-checkout',
+    imports: [ProductListComponent],
+    templateUrl: './checkout.component.html',
+    styleUrl: './checkout.component.scss'
 })
 export class CheckoutComponent {
   private readonly store = inject(Store);

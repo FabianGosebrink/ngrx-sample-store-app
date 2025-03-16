@@ -11,18 +11,17 @@ import { selectProductDetail } from '../../state/product-detail.selectors';
 import { CheckoutActions } from '../../../../shared/state/checkout.actions';
 
 @Component({
-  selector: 'app-product-detail',
-  standalone: true,
-  imports: [
-    CurrencyPipe,
-    NgOptimizedImage,
-    CategoryNamePipe,
-    RouterLink,
-    ProductImageComponent,
-    ProductInfoComponent,
-  ],
-  templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.scss',
+    selector: 'app-product-detail',
+    imports: [
+        CurrencyPipe,
+        NgOptimizedImage,
+        CategoryNamePipe,
+        RouterLink,
+        ProductImageComponent,
+        ProductInfoComponent,
+    ],
+    templateUrl: './product-detail.component.html',
+    styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent implements OnInit {
   private readonly store = inject(Store);
