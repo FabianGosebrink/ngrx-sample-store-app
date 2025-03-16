@@ -3,11 +3,10 @@ import { Product } from '../../../../shared/models/product.models';
 import { ProductComponent } from '../product/product.component';
 
 @Component({
-  selector: 'app-product-category',
-  standalone: true,
-  imports: [ProductComponent],
-  templateUrl: './product-category.component.html',
-  styleUrl: './product-category.component.scss',
+    selector: 'app-product-category',
+    imports: [ProductComponent],
+    templateUrl: './product-category.component.html',
+    styleUrl: './product-category.component.scss'
 })
 export class ProductCategoryComponent {
   categoryName = input.required<string>();

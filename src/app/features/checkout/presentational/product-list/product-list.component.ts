@@ -4,11 +4,10 @@ import { Product } from '../../../../shared/models/product.models';
 import { ProductListEntryComponent } from '../product-list-entry/product-list-entry.component';
 
 @Component({
-  selector: 'app-product-list',
-  standalone: true,
-  imports: [ProductListEntryComponent, CurrencyPipe],
-  templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss',
+    selector: 'app-product-list',
+    imports: [ProductListEntryComponent, CurrencyPipe],
+    templateUrl: './product-list.component.html',
+    styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent {
   products = input.required<Product[]>();

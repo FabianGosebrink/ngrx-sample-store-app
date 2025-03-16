@@ -3,11 +3,10 @@ import { ProductListComponent } from '../../presentational/product-list/product-
 import { CheckoutStore } from '../../../../shared/state/checkout.store';
 
 @Component({
-  selector: 'app-checkout',
-  standalone: true,
-  imports: [ProductListComponent],
-  templateUrl: './checkout.component.html',
-  styleUrl: './checkout.component.scss',
+    selector: 'app-checkout',
+    imports: [ProductListComponent],
+    templateUrl: './checkout.component.html',
+    styleUrl: './checkout.component.scss'
 })
 export class CheckoutComponent {
   private readonly store = inject(CheckoutStore);

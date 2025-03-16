@@ -4,11 +4,10 @@ import { HeaderComponent } from '../../presentational/header/header.component';
 import { CheckoutStore } from '../../../../shared/state/checkout.store';
 
 @Component({
-  selector: 'app-shell',
-  standalone: true,
-  imports: [HeaderComponent, RouterOutlet],
-  templateUrl: './shell.component.html',
-  styleUrl: './shell.component.scss',
+    selector: 'app-shell',
+    imports: [HeaderComponent, RouterOutlet],
+    templateUrl: './shell.component.html',
+    styleUrl: './shell.component.scss'
 })
 export class ShellComponent {
   private readonly store = inject(CheckoutStore);
