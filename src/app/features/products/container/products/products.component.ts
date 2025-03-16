@@ -1,10 +1,10 @@
-import { AsyncPipe } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Product } from '../../../../shared/models/product.models';
 import { CategoryNamePipe } from '../../../../shared/pipes/category-name.pipe';
 import { ProductCategoryComponent } from '../../presentational/product-category/product-category.component';
-import { ProductComponent } from '../../presentational/product/product.component';
+
 import { ProductsActions } from '../../state/products.actions';
 import { selectProductsByCategories } from '../../state/products.selectors';
 import { CheckoutActions } from '../../../../shared/state/checkout.actions';
@@ -12,11 +12,9 @@ import { CheckoutActions } from '../../../../shared/state/checkout.actions';
 @Component({
     selector: 'app-products',
     imports: [
-        AsyncPipe,
-        ProductComponent,
-        ProductCategoryComponent,
-        CategoryNamePipe,
-    ],
+    ProductCategoryComponent,
+    CategoryNamePipe
+],
     templateUrl: './products.component.html',
     styleUrl: './products.component.scss'
 })

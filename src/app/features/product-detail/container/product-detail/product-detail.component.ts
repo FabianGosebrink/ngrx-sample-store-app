@@ -1,9 +1,9 @@
-import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
+
 import { Component, inject, input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Product } from '../../../../shared/models/product.models';
-import { CategoryNamePipe } from '../../../../shared/pipes/category-name.pipe';
+
 import { ProductImageComponent } from '../../presentational/product-image/product-image.component';
 import { ProductInfoComponent } from '../../presentational/product-info/product-info.component';
 import { ProductDetailActions } from '../../state/product-detail.actions';
@@ -13,13 +13,10 @@ import { CheckoutActions } from '../../../../shared/state/checkout.actions';
 @Component({
     selector: 'app-product-detail',
     imports: [
-        CurrencyPipe,
-        NgOptimizedImage,
-        CategoryNamePipe,
-        RouterLink,
-        ProductImageComponent,
-        ProductInfoComponent,
-    ],
+    RouterLink,
+    ProductImageComponent,
+    ProductInfoComponent
+],
     templateUrl: './product-detail.component.html',
     styleUrl: './product-detail.component.scss'
 })
