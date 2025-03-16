@@ -6,20 +6,18 @@ import { Product } from '../../../../shared/models/product.models';
 import { CategoryNamePipe } from '../../../../shared/pipes/category-name.pipe';
 import { CheckoutService } from '../../../../shared/services/checkout.service';
 import { ProductCategoryComponent } from '../../presentational/product-category/product-category.component';
-import { ProductComponent } from '../../presentational/product/product.component';
+
 import { ProductsService } from '../../service/products.service';
 
 @Component({
-  selector: 'app-products',
-  standalone: true,
-  imports: [
+    selector: 'app-products',
+    imports: [
     AsyncPipe,
-    ProductComponent,
     ProductCategoryComponent,
-    CategoryNamePipe,
-  ],
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.scss',
+    CategoryNamePipe
+],
+    templateUrl: './products.component.html',
+    styleUrl: './products.component.scss'
 })
 export class ProductsComponent {
   private readonly productsService = inject(ProductsService);
