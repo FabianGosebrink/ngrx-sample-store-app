@@ -15,23 +15,16 @@ import { ProductDetailActions } from './product-detail.actions';
 describe('ProductDetailEffects', () => {
   let actions$: Observable<Action>;
   let productDetailService: ProductDetailService;
-  let mockStore: MockStore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         provideMockActions(() => actions$),
-        provideMockStore(),
         MockProvider(ProductDetailService),
       ],
     });
 
     productDetailService = TestBed.inject(ProductDetailService);
-    mockStore = TestBed.inject(MockStore);
-  });
-
-  afterEach(() => {
-    mockStore.resetSelectors();
   });
 
   describe('loadProduct$', () => {
