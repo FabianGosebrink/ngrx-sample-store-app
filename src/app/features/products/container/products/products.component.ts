@@ -3,9 +3,9 @@ import { Component, inject } from '@angular/core';
 import { Product } from '../../../../shared/models/product.models';
 import { CategoryNamePipe } from '../../../../shared/pipes/category-name.pipe';
 import { ProductCategoryComponent } from '../../presentational/product-category/product-category.component';
-
-import { ProductsStore } from '../../state/products.store';
+import { productsEvents, ProductsStore } from '../../state/products.store';
 import { CheckoutStore } from '../../../../shared/state/checkout.store';
+import { Dispatcher } from '@ngrx/signals/events';
 
 @Component({
     selector: 'app-products',
@@ -20,8 +20,13 @@ import { CheckoutStore } from '../../../../shared/state/checkout.store';
 export class ProductsComponent {
   private readonly store = inject(ProductsStore);
   private readonly checkoutStore = inject(CheckoutStore);
+  readonly dispatcher = inject(Dispatcher);
 
   readonly productsByCategories = this.store.productsByCategories;
+
+  ngOnInit() {
+    this.dispatcher.dispatch(productsEvents.loadProducts());
+  }
 
   onProductClicked(id: string): void {
     this.store.navigateToDetail(id);
