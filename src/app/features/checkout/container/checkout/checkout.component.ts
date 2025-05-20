@@ -1,21 +1,26 @@
 import { Component, inject } from '@angular/core';
-import { CheckoutService } from '../../../../shared/services/checkout.service';
 import { ProductListComponent } from '../../presentational/product-list/product-list.component';
+import { Store } from '@ngrx/store';
+import {
+  selectCartProducts,
+  selectTotalAmount,
+} from '../../../../shared/checkout/state/checkout.selectors';
+import { CheckoutUserActions } from '../../../../shared/checkout/state/checkout.actions';
 
 @Component({
-    selector: 'app-checkout',
-    imports: [ProductListComponent],
-    templateUrl: './checkout.component.html',
-    styleUrl: './checkout.component.scss'
+  selector: 'app-checkout',
+  imports: [ProductListComponent],
+  templateUrl: './checkout.component.html',
+  styleUrl: './checkout.component.scss',
 })
 export class CheckoutComponent {
-  private readonly checkoutService = inject(CheckoutService);
+  readonly #store = inject(Store);
 
-  readonly cartProducts = this.checkoutService.cartProducts;
+  readonly cartProducts = this.#store.selectSignal(selectCartProducts);
 
-  readonly totalAmount = this.checkoutService.totalAmount;
+  readonly totalAmount = this.#store.selectSignal(selectTotalAmount);
 
   onRemoveClicked(index: number): void {
-    this.checkoutService.removeFromCart(index);
+    this.#store.dispatch(CheckoutUserActions.removeProductFromCart({ index }));
   }
 }

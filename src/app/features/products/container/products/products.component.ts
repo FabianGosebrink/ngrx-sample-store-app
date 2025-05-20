@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Product } from '../../../../shared/models/product.models';
 import { CategoryNamePipe } from '../../../../shared/pipes/category-name.pipe';
-import { CheckoutService } from '../../../../shared/services/checkout.service';
 import { ProductCategoryComponent } from '../../presentational/product-category/product-category.component';
 import { Store } from '@ngrx/store';
 import { ProductsUserActions } from '../../state/products.actions';
 import { selectProductsByCategories } from '../../state/products.selectors';
+import { CheckoutUserActions } from '../../../../shared/checkout/state/checkout.actions';
 
 @Component({
   selector: 'app-products',
@@ -15,7 +15,6 @@ import { selectProductsByCategories } from '../../state/products.selectors';
 })
 export class ProductsComponent implements OnInit {
   readonly #store = inject(Store);
-  private readonly checkoutService = inject(CheckoutService);
 
   readonly productsByCategories = this.#store.selectSignal(
     selectProductsByCategories,
@@ -30,6 +29,6 @@ export class ProductsComponent implements OnInit {
   }
 
   onCartClicked(product: Product): void {
-    this.checkoutService.addToCart(product);
+    this.#store.dispatch(CheckoutUserActions.addProductToCart({ product }));
   }
 }

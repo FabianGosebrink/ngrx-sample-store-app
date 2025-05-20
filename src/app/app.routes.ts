@@ -6,8 +6,8 @@ import { productsReducer } from './features/products/state/products.reducer';
 import { provideEffects } from '@ngrx/effects';
 import * as productsEffects from './features/products/state/products.effects';
 import * as productDetailEffects from './features/product-detail/state/product-detail.effects';
-import { productDetailFeatureKey } from './features/product-detail/state/product-detail.state';
 import { productDetailReducer } from './features/product-detail/state/product-detail.reducer';
+import { productDetailFeatureKey } from './features/product-detail/state/product-detail.state';
 
 export const routes: Routes = [
   {
