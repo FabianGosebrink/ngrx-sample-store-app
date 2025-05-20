@@ -1,36 +1,33 @@
-
-import { Component, inject, input } from '@angular/core';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { switchMap } from 'rxjs';
 import { Product } from '../../../../shared/models/product.models';
 
 import { CheckoutService } from '../../../../shared/services/checkout.service';
 import { ProductImageComponent } from '../../presentational/product-image/product-image.component';
 import { ProductInfoComponent } from '../../presentational/product-info/product-info.component';
-import { ProductDetailService } from '../../service/product-detail.service';
+import { Store } from '@ngrx/store';
+import { selectProductDetail } from '../../state/product-detail.selectors';
+import { ProductDetailUserActions } from '../../state/product-detail.actions';
 
 @Component({
-    selector: 'app-product-detail',
-    imports: [
-    RouterLink,
-    ProductImageComponent,
-    ProductInfoComponent
-],
-    templateUrl: './product-detail.component.html',
-    styleUrl: './product-detail.component.scss'
+  selector: 'app-product-detail',
+  imports: [RouterLink, ProductImageComponent, ProductInfoComponent],
+  templateUrl: './product-detail.component.html',
+  styleUrl: './product-detail.component.scss',
 })
-export class ProductDetailComponent {
-  private readonly productDetailService = inject(ProductDetailService);
+export class ProductDetailComponent implements OnInit {
+  readonly #store = inject(Store);
   private readonly checkoutService = inject(CheckoutService);
 
   id = input.required<string>();
 
-  product = toSignal(
-    toObservable(this.id).pipe(
-      switchMap((id) => this.productDetailService.loadProductDetail(id)),
-    ),
-  );
+  product = this.#store.selectSignal(selectProductDetail);
+
+  ngOnInit() {
+    this.#store.dispatch(
+      ProductDetailUserActions.loadProduct({ id: this.id() }),
+    );
+  }
 
   onAddToCartClicked(product: Product): void {
     this.checkoutService.addToCart(product);

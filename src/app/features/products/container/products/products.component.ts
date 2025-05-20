@@ -4,7 +4,7 @@ import { CategoryNamePipe } from '../../../../shared/pipes/category-name.pipe';
 import { CheckoutService } from '../../../../shared/services/checkout.service';
 import { ProductCategoryComponent } from '../../presentational/product-category/product-category.component';
 import { Store } from '@ngrx/store';
-import { ProductsActions } from '../../state/products.actions';
+import { ProductsUserActions } from '../../state/products.actions';
 import { selectProductsByCategories } from '../../state/products.selectors';
 
 @Component({
@@ -22,11 +22,11 @@ export class ProductsComponent implements OnInit {
   );
 
   ngOnInit() {
-    this.#store.dispatch(ProductsActions.loadProducts());
+    this.#store.dispatch(ProductsUserActions.loadProducts());
   }
 
   onProductClicked(id: string): void {
-    this.#store.dispatch(ProductsActions.navigateToDetail({ id }));
+    this.#store.dispatch(ProductsUserActions.navigateToDetail({ id }));
   }
 
   onCartClicked(product: Product): void {
