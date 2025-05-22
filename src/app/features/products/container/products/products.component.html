@@ -1,5 +1,5 @@
 <div class="products-list">
-  @for (productCategory of productsByCategories();
+  @for (productCategory of productsStore.productsByCategories();
     track productCategory.category) {
     <app-product-category
       [categoryName]="productCategory.category | categoryName"

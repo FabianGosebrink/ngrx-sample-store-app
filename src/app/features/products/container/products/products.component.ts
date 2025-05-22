@@ -1,31 +1,24 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Product } from '../../../../shared/models/product.models';
 import { CategoryNamePipe } from '../../../../shared/pipes/category-name.pipe';
 import { ProductCategoryComponent } from '../../presentational/product-category/product-category.component';
 import { Store } from '@ngrx/store';
-import { ProductsUserActions } from '../../state/products.actions';
-import { selectProductsByCategories } from '../../state/products.selectors';
 import { CheckoutUserActions } from '../../../../shared/checkout/state/checkout.actions';
+import { ProductsStore } from '../../state/products.store';
 
 @Component({
   selector: 'app-products',
   imports: [ProductCategoryComponent, CategoryNamePipe],
+  providers: [ProductsStore],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   readonly #store = inject(Store);
-
-  readonly productsByCategories = this.#store.selectSignal(
-    selectProductsByCategories,
-  );
-
-  ngOnInit() {
-    this.#store.dispatch(ProductsUserActions.loadProducts());
-  }
+  readonly productsStore = inject(ProductsStore);
 
   onProductClicked(id: string): void {
-    this.#store.dispatch(ProductsUserActions.navigateToDetail({ id }));
+    this.productsStore.navigateToDetail(id);
   }
 
   onCartClicked(product: Product): void {
