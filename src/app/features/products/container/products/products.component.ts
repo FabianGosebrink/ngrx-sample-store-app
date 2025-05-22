@@ -2,9 +2,8 @@ import { Component, inject } from '@angular/core';
 import { Product } from '../../../../shared/models/product.models';
 import { CategoryNamePipe } from '../../../../shared/pipes/category-name.pipe';
 import { ProductCategoryComponent } from '../../presentational/product-category/product-category.component';
-import { Store } from '@ngrx/store';
-import { CheckoutUserActions } from '../../../../shared/checkout/state/checkout.actions';
 import { ProductsStore } from '../../state/products.store';
+import { CheckoutStore } from '../../../../shared/checkout/state/checkout.store';
 
 @Component({
   selector: 'app-products',
@@ -14,7 +13,7 @@ import { ProductsStore } from '../../state/products.store';
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent {
-  readonly #store = inject(Store);
+  readonly checkoutStore = inject(CheckoutStore);
   readonly productsStore = inject(ProductsStore);
 
   onProductClicked(id: string): void {
@@ -22,6 +21,6 @@ export class ProductsComponent {
   }
 
   onCartClicked(product: Product): void {
-    this.#store.dispatch(CheckoutUserActions.addProductToCart({ product }));
+    this.checkoutStore.addProduct(product);
   }
 }

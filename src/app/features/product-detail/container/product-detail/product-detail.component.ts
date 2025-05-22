@@ -3,9 +3,8 @@ import { RouterLink } from '@angular/router';
 import { Product } from '../../../../shared/models/product.models';
 import { ProductImageComponent } from '../../presentational/product-image/product-image.component';
 import { ProductInfoComponent } from '../../presentational/product-info/product-info.component';
-import { Store } from '@ngrx/store';
-import { CheckoutUserActions } from '../../../../shared/checkout/state/checkout.actions';
 import { ProductDetailStore } from '../../state/product-detail.store';
+import { CheckoutStore } from '../../../../shared/checkout/state/checkout.store';
 
 @Component({
   selector: 'app-product-detail',
@@ -15,8 +14,8 @@ import { ProductDetailStore } from '../../state/product-detail.store';
   styleUrl: './product-detail.component.scss',
 })
 export class ProductDetailComponent implements OnInit {
-  readonly #store = inject(Store);
   readonly productDetailStore = inject(ProductDetailStore);
+  readonly checkoutStore = inject(CheckoutStore);
 
   id = input.required<string>();
 
@@ -25,6 +24,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   onAddToCartClicked(product: Product): void {
-    this.#store.dispatch(CheckoutUserActions.addProductToCart({ product }));
+    this.checkoutStore.addProduct(product);
   }
 }

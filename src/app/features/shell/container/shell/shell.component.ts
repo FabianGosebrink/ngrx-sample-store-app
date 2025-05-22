@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../../presentational/header/header.component';
-import { Store } from '@ngrx/store';
-import { selectCartProductCount } from '../../../../shared/checkout/state/checkout.selectors';
+import { CheckoutStore } from '../../../../shared/checkout/state/checkout.store';
 
 @Component({
   selector: 'app-shell',
@@ -11,7 +10,5 @@ import { selectCartProductCount } from '../../../../shared/checkout/state/checko
   styleUrl: './shell.component.scss',
 })
 export class ShellComponent {
-  readonly #store = inject(Store);
-
-  readonly cartProductsCount = this.#store.selectSignal(selectCartProductCount);
+  readonly checkoutStore = inject(CheckoutStore);
 }
