@@ -1,27 +1,58 @@
-import {
-  patchState,
-  signalStore,
-  withHooks,
-  withMethods,
-  withState,
-} from '@ngrx/signals';
+import { signalStore, type, withMethods, withState } from '@ngrx/signals';
 import { withProductsSelectors } from './products.selectors';
 import { initialProductsState, ProductState } from './products.state';
-import {
-  setFulfilled,
-  setPending,
-  withLoadingState,
-} from '../../../shared/store-features/loading-state.feature';
+import { withLoadingState } from '../../../shared/store-features/loading-state.feature';
 import { inject } from '@angular/core';
 import { ProductsService } from '../service/products.service';
-import { Router } from '@angular/router';
-import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { exhaustMap } from 'rxjs';
-import { tapResponse } from '@ngrx/operators';
+import { mapResponse } from '@ngrx/operators';
+import {
+  eventGroup,
+  Events,
+  on,
+  withEffects,
+  withReducer,
+} from '@ngrx/signals/events';
+import { Product } from '../../../shared/models/product.models';
+import { Router } from '@angular/router';
+
+export const productEvents = eventGroup({
+  source: 'Products',
+  events: {
+    loadProducts: type<void>(),
+    loadProductsSuccess: type<Product[]>(),
+    loadProductsFailure: type<any>(),
+  },
+});
 
 export const ProductsStore = signalStore(
   withState<ProductState>(initialProductsState),
   withLoadingState(),
+  withReducer(
+    on(productEvents.loadProducts, () => ({ loading: true })),
+    on(productEvents.loadProductsSuccess, ({ payload }) => ({
+      loading: false,
+      products: payload,
+    })),
+  ),
+  withEffects(
+    (
+      store,
+      events = inject(Events),
+      productsService = inject(ProductsService),
+    ) => ({
+      loadProducts$: events.on(productEvents.loadProducts).pipe(
+        exhaustMap(() =>
+          productsService.loadProducts().pipe(
+            mapResponse({
+              next: (products) => productEvents.loadProductsSuccess(products),
+              error: (error) => productEvents.loadProductsFailure(error),
+            }),
+          ),
+        ),
+      ),
+    }),
+  ),
   withProductsSelectors(),
   withMethods(
     (
@@ -29,24 +60,24 @@ export const ProductsStore = signalStore(
       productsService = inject(ProductsService),
       router = inject(Router),
     ) => ({
-      loadProducts: rxMethod<void>(
-        exhaustMap(() => {
-          patchState(store, setPending());
-
-          return productsService.loadProducts().pipe(
-            tapResponse({
-              next: (products) =>
-                patchState(store, { products }, setFulfilled()),
-              error: console.error,
-            }),
-          );
-        }),
-      ),
+      // loadProducts: rxMethod<void>(
+      //   exhaustMap(() => {
+      //     patchState(store, setPending());
+      //
+      //     return productsService.loadProducts().pipe(
+      //       tapResponse({
+      //         next: (products) =>
+      //           patchState(store, { products }, setFulfilled()),
+      //         error: console.error,
+      //       }),
+      //     );
+      //   }),
+      // ),
 
       navigateToDetail: (id: string) => router.navigate(['/products', id]),
     }),
   ),
-  withHooks({
-    onInit: ({ loadProducts }) => loadProducts(),
-  }),
+  // withHooks({
+  //   onInit: ({ loadProducts }) => loadProducts(),
+  // }),
 );
