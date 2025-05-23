@@ -1,14 +1,16 @@
-<div class="products-list">
-  @for (productCategory of productsStore.productsByCategories();
-    track productCategory.category) {
-    <app-product-category
-      [categoryName]="productCategory.category | categoryName"
-      [products]="productCategory.products"
-      (clicked)="onProductClicked($event)"
-      (cartClicked)="onCartClicked($event)"
-    />
-  }
-</div>
-
+@if (productsStore.isPending()) {
+  Loading...
+} @else {
+  <div class="products-list">
+    @for (productCategory of productsStore.productsByCategories(); track productCategory.category) {
+      <app-product-category
+        [categoryName]="productCategory.category | categoryName"
+        [products]="productCategory.products"
+        (clicked)="onProductClicked($event)"
+        (cartClicked)="onCartClicked($event)"
+      />
+    }
+  </div>
+}
 
 

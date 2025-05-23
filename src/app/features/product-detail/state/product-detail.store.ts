@@ -5,6 +5,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { exhaustMap } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
 import { Product } from '../../../shared/models/product.models';
+import { withLoadingState } from '../../../shared/store-features/loading-state.feature';
 
 export type ProductDetailState = {
   product: Product | null;
@@ -16,6 +17,7 @@ export const initialProductDetailState: ProductDetailState = {
 
 export const ProductDetailStore = signalStore(
   withState(initialProductDetailState),
+  withLoadingState(),
   withMethods(
     (store, productDetailsService = inject(ProductDetailService)) => ({
       loadProduct: rxMethod<string>(
