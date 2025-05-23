@@ -1,12 +1,18 @@
-import { signalStore, type, withMethods, withState } from '@ngrx/signals';
-import { withProductsSelectors } from './products.selectors';
-import { initialProductsState, ProductState } from './products.state';
+import {
+  signalStore,
+  type,
+  withComputed,
+  withHooks,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import { withLoadingState } from '../../../shared/store-features/loading-state.feature';
-import { inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { ProductsService } from '../service/products.service';
 import { exhaustMap } from 'rxjs';
 import { mapResponse } from '@ngrx/operators';
 import {
+  Dispatcher,
   eventGroup,
   Events,
   on,
@@ -15,6 +21,16 @@ import {
 } from '@ngrx/signals/events';
 import { Product } from '../../../shared/models/product.models';
 import { Router } from '@angular/router';
+
+export type ProductState = {
+  products: Product[];
+  loading: boolean;
+};
+
+export const initialProductsState: ProductState = {
+  products: [],
+  loading: false,
+};
 
 export const productEvents = eventGroup({
   source: 'Products',
@@ -53,31 +69,38 @@ export const ProductsStore = signalStore(
       ),
     }),
   ),
-  withProductsSelectors(),
-  withMethods(
-    (
-      store,
-      productsService = inject(ProductsService),
-      router = inject(Router),
-    ) => ({
-      // loadProducts: rxMethod<void>(
-      //   exhaustMap(() => {
-      //     patchState(store, setPending());
-      //
-      //     return productsService.loadProducts().pipe(
-      //       tapResponse({
-      //         next: (products) =>
-      //           patchState(store, { products }, setFulfilled()),
-      //         error: console.error,
-      //       }),
-      //     );
-      //   }),
-      // ),
+  withComputed((store) => ({
+    productsByCategories: computed(() => {
+      const products = store.products();
+      const productsByCategory = products.reduce(
+        (result: Record<string, Product[]>, product) => {
+          const category = product.category;
 
-      navigateToDetail: (id: string) => router.navigate(['/products', id]),
+          if (!result[category]) {
+            result[category] = [];
+          }
+
+          result[category].push(product);
+
+          return result;
+        },
+        {},
+      );
+
+      const categories = Object.keys(productsByCategory);
+
+      return categories.map((category) => ({
+        category,
+        products: productsByCategory[category],
+      }));
     }),
-  ),
-  // withHooks({
-  //   onInit: ({ loadProducts }) => loadProducts(),
-  // }),
+  })),
+  withMethods((_store, router = inject(Router)) => ({
+    navigateToDetail: (id: string) => router.navigate(['/products', id]),
+  })),
+  withHooks({
+    onInit(_store, dispatcher = inject(Dispatcher)) {
+      dispatcher.dispatch(productEvents.loadProducts());
+    },
+  }),
 );
