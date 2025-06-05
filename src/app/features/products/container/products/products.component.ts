@@ -8,20 +8,18 @@ import { CheckoutService } from '../../../../shared/services/checkout.service';
 import { ProductCategoryComponent } from '../../presentational/product-category/product-category.component';
 
 import { ProductsService } from '../../service/products.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-    selector: 'app-products',
-    imports: [
-    AsyncPipe,
-    ProductCategoryComponent,
-    CategoryNamePipe
-],
-    templateUrl: './products.component.html',
-    styleUrl: './products.component.scss'
+  selector: 'app-products',
+  imports: [AsyncPipe, ProductCategoryComponent, CategoryNamePipe],
+  templateUrl: './products.component.html',
+  styleUrl: './products.component.scss',
 })
 export class ProductsComponent {
   private readonly productsService = inject(ProductsService);
   private readonly checkoutService = inject(CheckoutService);
+  private readonly toastrService = inject(ToastrService);
   private readonly router = inject(Router);
 
   productCategories$ = this.productsService.loadProducts().pipe(
@@ -51,6 +49,8 @@ export class ProductsComponent {
   }
 
   onCartClicked(product: Product): void {
-    this.checkoutService.addToCart(product);
+    this.checkoutService.addToCart(product).subscribe(() => {
+      this.toastrService.success('Item Added to Cart');
+    });
   }
 }

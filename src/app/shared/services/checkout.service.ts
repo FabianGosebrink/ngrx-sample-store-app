@@ -1,27 +1,42 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Product } from '../models/product.models';
+import { map, Subject, timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CheckoutService {
-  readonly cartProducts = signal<Product[]>([]);
+  readonly #cartProductsChanged = new Subject<Product[]>();
+  readonly #cartProducts = signal<Product[]>([]);
 
-  readonly cartProductCount = computed(() => this.cartProducts().length);
+  cartProductsChanged = this.#cartProductsChanged.asObservable();
 
-  readonly totalAmount = computed(() =>
-    this.cartProducts().reduce((acc: number, prev) => acc + prev.price, 0),
-  );
+  addToCart(product: Product) {
+    return timer(1000).pipe(
+      map(() => {
+        this.#cartProducts.update((products) => [...products, product]);
 
-  addToCart(product: Product): void {
-    this.cartProducts.update((products) => [...products, product]);
+        this.#cartProductsChanged.next(this.#cartProducts());
+        return product;
+      }),
+    );
   }
 
-  removeFromCart(index: number): void {
-    this.cartProducts.update((products) => {
-      products.splice(index, 1);
+  getCartProducts() {
+    return timer(1000).pipe(map(() => this.#cartProducts()));
+  }
 
-      return [...products];
-    });
+  removeFromCart(index: number) {
+    return timer(1000).pipe(
+      map(() => {
+        this.#cartProducts.update((products) => {
+          products.splice(index, 1);
+
+          return [...products];
+        });
+
+        return this.#cartProducts();
+      }),
+    );
   }
 }
