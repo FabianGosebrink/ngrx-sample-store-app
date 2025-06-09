@@ -1,33 +1,37 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Product } from '../models/product.models';
-import { map, Subject, timer } from 'rxjs';
+import { map, Subject, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CheckoutService {
-  readonly #cartProductsChanged = new Subject<Product[]>();
+  readonly #baseUrl = 'http://localhost:3000/cart/';
+  readonly #http = inject(HttpClient);
   readonly #cartProducts = signal<Product[]>([]);
 
+  readonly #cartProductsChanged = new Subject<Product[]>();
   cartProductsChanged = this.#cartProductsChanged.asObservable();
 
   addToCart(product: Product) {
-    return timer(1000).pipe(
-      map(() => {
-        this.#cartProducts.update((products) => [...products, product]);
+    return this.#http.post<Product[]>(this.#baseUrl, product).pipe(
+      map((products) => {
+        this.#cartProductsChanged.next(products);
 
-        this.#cartProductsChanged.next(this.#cartProducts());
-        return product;
+        return products;
       }),
     );
   }
 
   getCartProducts() {
-    return timer(1000).pipe(map(() => this.#cartProducts()));
+    return this.#http
+      .get<Product[]>(this.#baseUrl)
+      .pipe(tap((products) => this.#cartProducts.set(products)));
   }
 
   removeFromCart(index: number) {
-    return timer(1000).pipe(
+    return this.#http.delete(this.#baseUrl + index).pipe(
       map(() => {
         this.#cartProducts.update((products) => {
           products.splice(index, 1);
@@ -35,7 +39,7 @@ export class CheckoutService {
           return [...products];
         });
 
-        return this.#cartProducts();
+        this.#cartProductsChanged.next(this.#cartProducts());
       }),
     );
   }

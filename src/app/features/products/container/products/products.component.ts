@@ -6,7 +6,6 @@ import { Product } from '../../../../shared/models/product.models';
 import { CategoryNamePipe } from '../../../../shared/pipes/category-name.pipe';
 import { CheckoutService } from '../../../../shared/services/checkout.service';
 import { ProductCategoryComponent } from '../../presentational/product-category/product-category.component';
-
 import { ProductsService } from '../../service/products.service';
 import { ToastrService } from 'ngx-toastr';
 

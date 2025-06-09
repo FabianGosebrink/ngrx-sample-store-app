@@ -10,9 +10,8 @@ import { HeaderComponent } from '../../presentational/header/header.component';
   styleUrl: './shell.component.scss',
 })
 export class ShellComponent implements OnInit {
-  private readonly checkoutService = inject(CheckoutService);
-
   cartProductsCount = signal(0);
+  private readonly checkoutService = inject(CheckoutService);
 
   ngOnInit() {
     this.checkoutService.getCartProducts().subscribe((products) => {

@@ -1,6 +1,6 @@
 <h3>Checkout</h3>
 <app-product-list
+  (removeClicked)="onRemoveClicked($event)"
   [products]="cartProducts()"
   [totalAmount]="totalAmount()"
-  (removeClicked)="onRemoveClicked($event)"
 />
