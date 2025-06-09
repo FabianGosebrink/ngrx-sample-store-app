@@ -51,6 +51,22 @@ app.get(
   }),
 );
 
+app.get(
+  '/products/:id',
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const products = await readJSON<Product[]>('products.json');
+    const product = products.find((p) => p.id === id);
+
+    if (!product) {
+      res.status(404).json({ error: 'Product not found' });
+      return;
+    }
+
+    res.json(product);
+  }),
+);
+
 // Get current cart
 app.get(
   '/cart',

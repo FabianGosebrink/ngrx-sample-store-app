@@ -3,6 +3,7 @@ import { CheckoutService } from '../../../../shared/services/checkout.service';
 import { ProductListComponent } from '../../presentational/product-list/product-list.component';
 import { Product } from '../../../../shared/models/product.models';
 import { ToastrService } from 'ngx-toastr';
+import { merge } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
@@ -17,24 +18,12 @@ export class CheckoutComponent implements OnInit {
   private readonly checkoutService = inject(CheckoutService);
 
   ngOnInit(): void {
-    this.checkoutService.getCartProducts().subscribe((products) => {
+    merge(
+      this.checkoutService.getCartProducts(),
+      this.checkoutService.cartProductsChanged,
+    ).subscribe((products) => {
       this.cartProducts.set(products);
-      const totalAmount = products.reduce(
-        (acc: number, prev) => acc + prev.price,
-        0,
-      );
-
-      this.totalAmount.set(totalAmount);
-    });
-
-    this.checkoutService.cartProductsChanged.subscribe((products) => {
-      this.cartProducts.set(products);
-
-      const totalAmount = products.reduce(
-        (acc: number, prev) => acc + prev.price,
-        0,
-      );
-
+      const totalAmount = this.calculateTotalAmount(products);
       this.totalAmount.set(totalAmount);
     });
   }
@@ -43,5 +32,9 @@ export class CheckoutComponent implements OnInit {
     this.checkoutService.removeFromCart(index).subscribe(() => {
       this.toastrService.success('Item removed from Cart');
     });
+  }
+
+  private calculateTotalAmount(products: Product[]) {
+    return products.reduce((acc: number, prev) => acc + prev.price, 0);
   }
 }
