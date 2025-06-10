@@ -1,4 +1,3 @@
-
 import { Component, inject, input } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
@@ -11,14 +10,10 @@ import { ProductInfoComponent } from '../../presentational/product-info/product-
 import { ProductDetailService } from '../../service/product-detail.service';
 
 @Component({
-    selector: 'app-product-detail',
-    imports: [
-    RouterLink,
-    ProductImageComponent,
-    ProductInfoComponent
-],
-    templateUrl: './product-detail.component.html',
-    styleUrl: './product-detail.component.scss'
+  selector: 'app-product-detail',
+  imports: [RouterLink, ProductImageComponent, ProductInfoComponent],
+  templateUrl: './product-detail.component.html',
+  styleUrl: './product-detail.component.scss',
 })
 export class ProductDetailComponent {
   private readonly productDetailService = inject(ProductDetailService);

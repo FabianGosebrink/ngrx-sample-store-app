@@ -4,10 +4,10 @@ import { Product } from '../../../../shared/models/product.models';
 import { CategoryNamePipe } from '../../../../shared/pipes/category-name.pipe';
 
 @Component({
-    selector: 'app-product-list-entry',
-    imports: [NgOptimizedImage, CategoryNamePipe, CurrencyPipe],
-    templateUrl: './product-list-entry.component.html',
-    styleUrl: './product-list-entry.component.scss'
+  selector: 'app-product-list-entry',
+  imports: [NgOptimizedImage, CategoryNamePipe, CurrencyPipe],
+  templateUrl: './product-list-entry.component.html',
+  styleUrl: './product-list-entry.component.scss',
 })
 export class ProductListEntryComponent {
   product = input.required<Product>();

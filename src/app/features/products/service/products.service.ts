@@ -10,6 +10,6 @@ export class ProductsService {
   private readonly http = inject(HttpClient);
 
   loadProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('http/products.json');
+    return this.http.get<Product[]>('http://localhost:3000/products');
   }
 }
