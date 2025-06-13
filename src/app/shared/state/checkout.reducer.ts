@@ -1,16 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
 import { initialCheckoutState } from './checkout.state';
-import { CheckoutActions } from '../../../shared/state/checkout.actions';
+import { CheckoutApiActions } from './checkout.actions';
 
 export const checkoutReducer = createReducer(
   initialCheckoutState,
 
-  on(CheckoutActions.addProduct, (state, { product }) => ({
+  on(CheckoutApiActions.addProductSuccess, (state, { completeCart }) => ({
     ...state,
-    cartProducts: [...state.cartProducts, product],
+    cartProducts: [...completeCart],
   })),
 
-  on(CheckoutActions.removeProduct, (state, { index }) => {
+  on(CheckoutApiActions.removeProductSuccess, (state, { index }) => {
     const cartProducts = [...state.cartProducts];
 
     cartProducts.splice(index, 1);

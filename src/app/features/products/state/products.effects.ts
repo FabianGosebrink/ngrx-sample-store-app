@@ -4,17 +4,19 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of } from 'rxjs';
 import { ProductsService } from '../service/products.service';
-import { ProductsActions } from './products.actions';
+import { ProductsApiActions, ProductsUserActions } from './products.actions';
 
 export const loadProducts$ = createEffect(
   (actions$ = inject(Actions), productsService = inject(ProductsService)) =>
     actions$.pipe(
-      ofType(ProductsActions.loadProducts),
+      ofType(ProductsUserActions.loadProducts),
       exhaustMap(() =>
         productsService.loadProducts().pipe(
-          map((products) => ProductsActions.loadProductsSuccess({ products })),
+          map((products) =>
+            ProductsApiActions.loadProductsSuccess({ products }),
+          ),
           catchError((error: HttpErrorResponse) =>
-            of(ProductsActions.loadProductsFailure({ error })),
+            of(ProductsApiActions.loadProductsFailure({ error })),
           ),
         ),
       ),
@@ -25,7 +27,7 @@ export const loadProducts$ = createEffect(
 export const navigateToDetail$ = createEffect(
   (actions$ = inject(Actions), router = inject(Router)) =>
     actions$.pipe(
-      ofType(ProductsActions.navigateToDetail),
+      ofType(ProductsUserActions.navigateToDetail),
       exhaustMap(({ id }) => router.navigate(['products', id])),
     ),
   { functional: true, dispatch: false },

@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { checkoutFeatureKey, CheckoutState } from './checkout.state';
-import { Product } from '../../../shared/models/product.models';
+import { Product } from '../models/product.models';
 
 const featureSelector =
   createFeatureSelector<CheckoutState>(checkoutFeatureKey);

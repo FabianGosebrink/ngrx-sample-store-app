@@ -8,10 +8,10 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-
 import { routes } from './app.routes';
-import { checkoutFeatureKey } from './features/checkout/state/checkout.state';
-import { checkoutReducer } from './features/checkout/state/checkout.reducer';
+import { checkoutFeatureKey } from './shared/state/checkout.state';
+import { checkoutReducer } from './shared/state/checkout.reducer';
+import * as checkoutEffects from './shared/state/checkout.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       [checkoutFeatureKey]: checkoutReducer,
     }),
-    provideEffects(),
+    provideEffects([checkoutEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
 };
