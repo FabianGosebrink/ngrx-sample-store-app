@@ -5,7 +5,7 @@ import { CategoryNamePipe } from '../../../../shared/pipes/category-name.pipe';
 import { ProductCategoryComponent } from '../../presentational/product-category/product-category.component';
 import { ProductsUserActions } from '../../state/products.actions';
 import { selectProductsByCategories } from '../../state/products.selectors';
-import { CheckoutUserActions } from '../../../../shared/state/checkout.actions';
+import { CheckoutUserActions } from '../../../../shared/checkout/state/checkout.actions';
 
 @Component({
   selector: 'app-products',

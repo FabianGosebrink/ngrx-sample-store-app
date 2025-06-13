@@ -9,9 +9,9 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { routes } from './app.routes';
-import { checkoutFeatureKey } from './shared/state/checkout.state';
-import { checkoutReducer } from './shared/state/checkout.reducer';
-import * as checkoutEffects from './shared/state/checkout.effects';
+import { checkoutFeatureKey } from './shared/checkout/state/checkout.state';
+import { checkoutReducer } from './shared/checkout/state/checkout.reducer';
+import * as checkoutEffects from './shared/checkout/state/checkout.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [

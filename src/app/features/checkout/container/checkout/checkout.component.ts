@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import {
   selectCartProducts,
   selectTotalAmount,
-} from '../../../../shared/state/checkout.selectors';
-import { CheckoutUserActions } from '../../../../shared/state/checkout.actions';
+} from '../../../../shared/checkout/state/checkout.selectors';
+import { CheckoutUserActions } from '../../../../shared/checkout/state/checkout.actions';
 
 @Component({
   selector: 'app-checkout',

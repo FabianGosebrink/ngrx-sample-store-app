@@ -1,4 +1,4 @@
-import { Product } from '../models/product.models';
+import { Product } from '../../models/product.models';
 
 export const checkoutFeatureKey = 'checkout';
 

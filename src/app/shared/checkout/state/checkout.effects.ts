@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { exhaustMap, map } from 'rxjs';
-import { CheckoutService } from '../checkout/services/checkout.service';
+import { CheckoutService } from '../services/checkout.service';
 import { CheckoutApiActions, CheckoutUserActions } from './checkout.actions';
 
 export const loadProducts$ = createEffect(

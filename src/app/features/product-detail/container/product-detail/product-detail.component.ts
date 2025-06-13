@@ -6,7 +6,7 @@ import { ProductImageComponent } from '../../presentational/product-image/produc
 import { ProductInfoComponent } from '../../presentational/product-info/product-info.component';
 import { ProductDetailActions } from '../../state/product-detail.actions';
 import { selectProductDetail } from '../../state/product-detail.selectors';
-import { CheckoutUserActions } from '../../../../shared/state/checkout.actions';
+import { CheckoutUserActions } from '../../../../shared/checkout/state/checkout.actions';
 
 @Component({
   selector: 'app-product-detail',
