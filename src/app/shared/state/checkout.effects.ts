@@ -29,8 +29,8 @@ export const addProduct$ = createEffect(
         checkoutService
           .addToCart(product)
           .pipe(
-            map((completeCart) =>
-              CheckoutApiActions.addProductSuccess({ completeCart }),
+            map((products) =>
+              CheckoutApiActions.addProductSuccess({ products }),
             ),
           ),
       ),

@@ -5,10 +5,14 @@ import { CheckoutApiActions } from './checkout.actions';
 export const checkoutReducer = createReducer(
   initialCheckoutState,
 
-  on(CheckoutApiActions.addProductSuccess, (state, { completeCart }) => ({
-    ...state,
-    cartProducts: [...completeCart],
-  })),
+  on(
+    CheckoutApiActions.addProductSuccess,
+    CheckoutApiActions.loadProductsSuccess,
+    (state, { products }) => ({
+      ...state,
+      cartProducts: [...products],
+    }),
+  ),
 
   on(CheckoutApiActions.removeProductSuccess, (state, { index }) => {
     const cartProducts = [...state.cartProducts];

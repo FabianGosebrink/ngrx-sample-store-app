@@ -13,7 +13,7 @@ export const CheckoutUserActions = createActionGroup({
 export const CheckoutApiActions = createActionGroup({
   source: 'Checkout Api',
   events: {
-    'Add Product Success': props<{ completeCart: Product[] }>(),
+    'Add Product Success': props<{ products: Product[] }>(),
     'Load Products Success': props<{ products: Product[] }>(),
     'Remove Product Success': props<{ index: number }>(),
   },
