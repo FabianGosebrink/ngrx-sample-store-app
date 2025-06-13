@@ -1,12 +1,12 @@
 <div class="products-list">
   @for (
-    productCategory of productsByCategories();
+    productCategory of store.productsByCategories();
     track productCategory.category
   ) {
     <app-product-category
       [categoryName]="productCategory.category | categoryName"
       [products]="productCategory.products"
-      (clicked)="onProductClicked($event)"
+      (clicked)="store.navigateToDetail($event)"
       (cartClicked)="onCartClicked($event)"
     />
   }

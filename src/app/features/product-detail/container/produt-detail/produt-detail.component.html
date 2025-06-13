@@ -1,5 +1,5 @@
 <a class="back-link" routerLink="products">Back</a>
-@if (product(); as product) {
+@if (store.product(); as product) {
   <div class="detail-container">
     <app-product-image [imageUrl]="product.imageUrl" />
 
