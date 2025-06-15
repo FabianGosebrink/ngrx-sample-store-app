@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": "1",
+    "name": "Throne of Glass",
+    "category": "book_fantasy",
+    "price": 34.9,
+    "imageUrl": "https://images.isbndb.com/covers/09/57/9781639730957.jpg"
+  }
+]

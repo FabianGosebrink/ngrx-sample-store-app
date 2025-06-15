@@ -13,6 +13,7 @@ import { exhaustMap } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CheckoutService } from '../services/checkout.service';
+import { ToastrService } from 'ngx-toastr';
 
 type CheckoutState = {
   products: Product[];
@@ -36,49 +37,59 @@ export const CheckoutStore = signalStore(
       );
     }),
   })),
-  withMethods((store, checkoutService = inject(CheckoutService)) => ({
-    loadAll: rxMethod<void>(
-      exhaustMap(() =>
-        checkoutService.getCartProducts().pipe(
-          tapResponse({
-            next: (products) => patchState(store, { products }),
-            error: (error: HttpErrorResponse) =>
-              console.error('Failed to load product.', error.message),
-          }),
+  withMethods(
+    (
+      store,
+      checkoutService = inject(CheckoutService),
+      toastrService = inject(ToastrService),
+    ) => ({
+      loadAll: rxMethod<void>(
+        exhaustMap(() =>
+          checkoutService.getCartProducts().pipe(
+            tapResponse({
+              next: (products) => patchState(store, { products }),
+              error: (error: HttpErrorResponse) =>
+                console.error('Failed to load product.', error.message),
+            }),
+          ),
         ),
       ),
-    ),
-    addProduct: rxMethod<Product>(
-      exhaustMap((product) =>
-        checkoutService.addToCart(product).pipe(
-          tapResponse({
-            next: (products) => patchState(store, { products }),
-            error: (error: HttpErrorResponse) =>
-              console.error('Failed to add product.', error.message),
-          }),
+      addProduct: rxMethod<Product>(
+        exhaustMap((product) =>
+          checkoutService.addToCart(product).pipe(
+            tapResponse({
+              next: (products) => {
+                toastrService.success('Item Added to Cart');
+                patchState(store, { products });
+              },
+              error: (error: HttpErrorResponse) =>
+                console.error('Failed to add product.', error.message),
+            }),
+          ),
         ),
       ),
-    ),
-    removeProduct: rxMethod<number>(
-      exhaustMap((index) =>
-        checkoutService.removeFromCart(index).pipe(
-          tapResponse({
-            next: () => {
-              const cartProducts = [...store.products()];
+      removeProduct: rxMethod<number>(
+        exhaustMap((index) =>
+          checkoutService.removeFromCart(index).pipe(
+            tapResponse({
+              next: () => {
+                const cartProducts = [...store.products()];
 
-              cartProducts.splice(index, 1);
+                cartProducts.splice(index, 1);
 
-              patchState(store, {
-                products: cartProducts,
-              });
-            },
-            error: (error: HttpErrorResponse) =>
-              console.error('Failed to remove product.', error.message),
-          }),
+                toastrService.success('Item removed from Cart');
+                patchState(store, {
+                  products: cartProducts,
+                });
+              },
+              error: (error: HttpErrorResponse) =>
+                console.error('Failed to remove product.', error.message),
+            }),
+          ),
         ),
       ),
-    ),
-  })),
+    }),
+  ),
   withHooks({
     onInit(store) {
       store.loadAll();
