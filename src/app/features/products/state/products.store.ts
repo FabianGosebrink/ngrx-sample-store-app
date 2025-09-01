@@ -31,12 +31,9 @@ export const ProductsStore = signalStore(
       const productsByCategory = products.reduce(
         (result: Record<string, Product[]>, product: Product) => {
           const { category } = product;
+          const resultCategory = result[category] ?? [];
 
-          if (!result[category]) {
-            result[category] = [];
-          }
-
-          result[category].push(product);
+          result[category] = [...resultCategory, product];
 
           return result;
         },
