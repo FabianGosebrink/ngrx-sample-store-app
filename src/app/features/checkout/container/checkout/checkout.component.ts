@@ -18,7 +18,7 @@ export class CheckoutComponent implements OnInit {
   readonly totalAmount = this.checkoutService.totalAmount;
 
   ngOnInit(): void {
-    this.checkoutService.getCartProducts();
+    this.checkoutService.getCartProducts().subscribe();
   }
 
   onRemoveClicked(index: number): void {

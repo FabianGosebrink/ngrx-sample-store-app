@@ -28,6 +28,6 @@ export class ProductDetailComponent {
   );
 
   onAddToCartClicked(product: Product): void {
-    this.checkoutService.addToCart(product);
+    this.checkoutService.addToCart(product).subscribe();
   }
 }
