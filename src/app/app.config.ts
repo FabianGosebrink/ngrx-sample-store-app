@@ -4,7 +4,7 @@ import {
   isDevMode,
   provideZoneChangeDetection,
 } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
@@ -18,14 +18,13 @@ import { provideToastr } from 'ngx-toastr';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withComponentInputBinding()),
+    provideRouter(routes, withComponentInputBinding(), withViewTransitions()),
     provideHttpClient(),
     provideStore({
       [checkoutFeatureKey]: checkoutReducer,
     }),
     provideEffects([checkoutEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideAnimations(),
     provideToastr({ positionClass: 'toast-bottom-right' }),
   ],
 };
