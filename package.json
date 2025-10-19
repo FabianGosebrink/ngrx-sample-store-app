@@ -10,14 +10,14 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^19.2.2",
-    "@angular/common": "^19.2.2",
-    "@angular/compiler": "^19.2.2",
-    "@angular/core": "^19.2.2",
-    "@angular/forms": "^19.2.2",
-    "@angular/platform-browser": "^19.2.2",
-    "@angular/platform-browser-dynamic": "^19.2.2",
-    "@angular/router": "^19.2.2",
+    "@angular/animations": "^20.3.6",
+    "@angular/common": "^20.3.6",
+    "@angular/compiler": "^20.3.6",
+    "@angular/core": "^20.3.6",
+    "@angular/forms": "^20.3.6",
+    "@angular/platform-browser": "^20.3.6",
+    "@angular/platform-browser-dynamic": "^20.3.6",
+    "@angular/router": "^20.3.6",
     "@ngrx/effects": "^19.2.0",
     "@ngrx/operators": "^19.2.0",
     "@ngrx/signals": "^19.2.0",
@@ -29,15 +29,15 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^19.2.3",
-    "@angular/cli": "^19.2.3",
-    "@angular/compiler-cli": "^19.2.2",
+    "@angular/build": "^20.3.6",
+    "@angular/cli": "^20.3.6",
+    "@angular/compiler-cli": "^20.3.6",
     "@types/jasmine": "~5.1.0",
     "@types/jest": "^29.5.13",
     "jest": "^29.7.0",
     "jest-preset-angular": "^14.5.3",
     "prettier": "3.3.3",
-    "typescript": "~5.5.2"
+    "typescript": "~5.9.3"
   },
   "jest": {
     "preset": "jest-preset-angular",
